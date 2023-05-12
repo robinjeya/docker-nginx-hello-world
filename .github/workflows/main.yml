@@ -16,7 +16,7 @@ jobs:
       - name: docker build
         uses: docker/build-push-action@v3
         with:
-          run: docker build . --file Dockerfile --tag my-image-name:${{ github.sha }}
+          run: docker build . --file Dockerfile --tag my-image-name:${{ github.sha }} .
           
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
