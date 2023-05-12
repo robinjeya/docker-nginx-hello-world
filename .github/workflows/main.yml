@@ -16,7 +16,7 @@ jobs:
       - name: docker build
         uses: docker/build-push-action@v3
         with:
-          file: docker build -t my-image:latest -f ./Dockerfile
+          file: docker build -t my-image:latest
           load: true
 
       - name: Run Trivy vulnerability scanner
