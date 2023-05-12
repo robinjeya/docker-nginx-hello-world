@@ -1,0 +1,32 @@
+name: Trivy Image Scanning
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: docker build
+        uses: docker/build-push-action@v3
+        with:
+          file: docker build -t my-image:latest -f ./Dockerfile
+          load: true
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'my-image:latest'
+          format: 'sarif'
+          output: 'trivy-dims-scan-report.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-dims-scan-report.sarif'
