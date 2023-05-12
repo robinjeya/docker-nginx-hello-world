@@ -26,6 +26,6 @@ jobs:
           output: 'trivy-dims-scan-report.sarif'
 
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/robinjeya/upload-sarif@v2
+        uses: github/docker-nginx-hello-world/upload-sarif@v2
         with:
           sarif_file: 'trivy-dims-scan-report.sarif'
