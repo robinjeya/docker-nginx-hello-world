@@ -16,12 +16,12 @@ jobs:
       - name: docker build
         uses: docker/build-push-action@v3
         with:
-          run: docker build --file Dockerfile --tag my-image-name:latest
+          run: docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
           
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/dockerbogo/docker-nginx-hello-world'
+          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
           format: 'sarif'
           output: 'trivy-dims-scan-report.sarif'
 
