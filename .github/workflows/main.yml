@@ -13,6 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: vigneshviky7
+          password: dckr_pat_6g2hc0QF9ExrX7PZDiRQP7gBIzo
+      
       - name: docker build
         uses: docker/build-push-action@v3
         with:
