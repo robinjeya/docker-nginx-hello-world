@@ -22,11 +22,10 @@ jobs:
       - name: docker build
         uses: docker/build-push-action@v3
         with:
-          run: docker build -t dockerbogo/docker-nginx001 .
+          run: docker build -t myapp:latest .
           
       - name: run as root for image pick   
-        with:
-          run: docker run -u 0
+        run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/tmp/.cache/ aquasec/trivy:0.10.0 myapp:latest
           
 #      - name: Docker Push
 #        run: docker push my-app:latest
@@ -34,7 +33,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/dockerbogo/docker-nginx001'
+          image-ref: 'myapp:latest'
           format: 'sarif'
           output: 'trivy-dims-scan-report.sarif'
 
