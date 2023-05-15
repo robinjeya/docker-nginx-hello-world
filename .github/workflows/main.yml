@@ -22,10 +22,10 @@ jobs:
       - name: docker build
         uses: docker/build-push-action@v3
         with:
-          run: docker build -t my-app:${{ github.sha }} .
+          run: docker build -t my-app:latest .
           
       - name: Docker Push
-        run: docker push my-app:${{ github.sha }}
+        run: docker push my-app:latest
           
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
