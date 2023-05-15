@@ -24,6 +24,9 @@ jobs:
         with:
           run: docker build -t vigneshviky7/mydemoapp:latest .
           
+      - name: docke run
+        run: docker run -it vigneshviky7/mydemoapp:latest
+          
       - name: Docker Push
         run: docker push vigneshviky7/mydemoapp:latest
           
