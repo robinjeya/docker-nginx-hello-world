@@ -22,7 +22,7 @@ jobs:
       - name: docker build
         uses: docker/build-push-action@v3
         with:
-          run: docker build -t docker.io/devops-counsel/py-app:${{ github.sha }} .
+          run: docker build -t dockerbogo/docker-nginx-hello-world .
           
 #      - name: Docker Push
 #        run: docker push my-app:latest
@@ -30,7 +30,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: docker.io/devops-counsel/py-app:${{ github.sha }}
+          image-ref: 'docker.io/dockerbogo/docker-nginx-hello-world'
           format: 'sarif'
           output: 'trivy-dims-scan-report.sarif'
 
