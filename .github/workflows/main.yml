@@ -18,26 +18,16 @@ jobs:
         with:
           username: vigneshviky7
           password: dckr_pat_6g2hc0QF9ExrX7PZDiRQP7gBIzo
+          
+          
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: vigneshviky7/clockbox:latest
       
-      - name: docker build
-        uses: docker/build-push-action@v3
-        with:
-          run: docker build -t vigneshviky7/mydemoapp:latest .
-          
-      - name: docke run
-        run: docker run -it vigneshviky7/mydemoapp:latest
-          
-      - name: Docker Push
-        run: docker push vigneshviky7/mydemoapp:latest
-          
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'dmyapp:latest'
-          format: 'sarif'
-          output: 'trivy-dims-scan-report.sarif'
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-dims-scan-report.sarif'
