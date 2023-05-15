@@ -25,7 +25,7 @@ jobs:
           run: docker build -t my-app:${{ github.sha }} .
           
       - name: Docker Push
-        run: docker push vigneshviky7/testapplication/my-app:${{ github.sha }}
+        run: docker push my-app:${{ github.sha }}
           
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
