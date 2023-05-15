@@ -25,9 +25,9 @@ jobs:
           run: docker build -t myapp:latest .
           
       - name: run as root for image pick   
-        run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/tmp/.cache/ aquasec/trivy:0.10.0 myapp:latest
+        run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/tmp/.cache/ aquasec/trivy:0.9.0 myapp:latest
           
-#      - name: Docker Push
+#      - name: Docker Puo
 #        run: docker push my-app:latest
           
       - name: Run Trivy vulnerability scanner
