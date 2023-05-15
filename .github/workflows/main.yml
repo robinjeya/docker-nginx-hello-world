@@ -13,24 +13,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: vigneshviky7
-          password: dckr_pat_6g2hc0QF9ExrX7PZDiRQP7gBIzo
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v2
+#        with:
+#          username: vigneshviky7
+#          password: dckr_pat_6g2hc0QF9ExrX7PZDiRQP7gBIzo
       
       - name: docker build
         uses: docker/build-push-action@v3
         with:
-          run: docker build -t my-app:latest .
+          run: docker build -t 'docker.io/devops-counsel/py-app:${{ github.sha }}' .
           
-      - name: Docker Push
-        run: docker push my-app:latest
+#      - name: Docker Push
+#        run: docker push my-app:latest
           
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: docker.io/vigneshviky7/testapplication/my-app:${{ github.sha }}
+          image-ref: 'docker.io/devops-counsel/py-app:${{ github.sha }}'
           format: 'sarif'
           output: 'trivy-dims-scan-report.sarif'
 
