@@ -23,7 +23,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           run: docker build -t dockerbogo/docker-nginx001 .
+          
       - name: run as root for image pick   
+        with:
           run: docker run -u 0
           
 #      - name: Docker Push
