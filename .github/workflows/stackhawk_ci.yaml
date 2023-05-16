@@ -3,7 +3,7 @@ name: StackHawk DAST Scan
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   scan:
