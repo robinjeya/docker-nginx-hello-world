@@ -16,18 +16,13 @@ jobs:
           
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: false
-          tags: localhost:8080/myapp:latest
-        
-      - name: Run application
-        run:  docker run -itd -p 8080:8000 http://localhost:8080/v2/myapp/blobs/localhost:8080/myapp:latest
-             
+
+      - name: Build docker images 
+        run: docker build -t local < ./Dockerfile 
+         
+      - name: Run tests 
+        run: docker run -it -v $PWD:/srv -w/srv local make test
+                     
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
         with:
