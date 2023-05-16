@@ -12,21 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-          
-          
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: false
-          tags: local
-         
+                 
       - name: Run tests 
-        run: docker run -v $PWD:/srv -w/srv local make test
+        run: docker run -p 8080:80 -d dockerbogo/docker-nginx-hello-world
                      
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
