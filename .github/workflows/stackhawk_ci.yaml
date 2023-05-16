@@ -22,11 +22,12 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: false
+          push: true
           tags: localhost:8080/myapp:latest
+          run: docker push localhost:8080/myapp:latest
         
       - name: Run application
-        run:  docker run -itd -p 8080:80 localhost:8080/myapp:latest
+        run:  docker run -itd -p 8080:8000 localhost:8080/myapp:latest
              
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
