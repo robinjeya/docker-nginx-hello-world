@@ -22,10 +22,10 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: docker/docker-nginx-hello-world       
+          tags: docker-test       
           
       - name: Run tests 
-        run: docker run -p 8080:80 -d docker/docker-nginx-hello-world
+        run: docker run -p 8080:80 -d docker-test
                      
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
