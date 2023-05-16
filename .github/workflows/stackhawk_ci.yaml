@@ -26,7 +26,7 @@ jobs:
           tags: local
          
       - name: Run tests 
-        run: docker run -it -v $PWD:/srv -w/srv local make test
+        run: docker run -v $PWD:/srv -w/srv local make test
                      
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
