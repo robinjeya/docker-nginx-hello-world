@@ -22,26 +22,9 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: newimage 
-    
-      - name: Save Docker Image as Tarball
-        run: |
-          docker save -o newimage.tar myapp
-          ls -lh newimage.tar
-
-      - name: Upload Docker Image Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: newimage
-          path: newimage.tar
           
-      - name: Download Docker Image Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: myapp-image
-          path: /tmp/newimage.tar
-
-      - name: Load Docker Image
-        run: docker load -i /tmp/newimage.tar
+      - name: image list
+        run: docker image ls
           
       - name: Run tests 
         run: docker run -p 8080:80 -d myappimage
