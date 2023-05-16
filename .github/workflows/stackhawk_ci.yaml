@@ -27,7 +27,8 @@ jobs:
           tags: demo/myapp:latest
         
       - name: Run application
-        run: docker run --rm --detach --publish 8080:80 --name demo/myapp:latest
+        run: docker run -d -p 8080:80 --name demo/myapp:latest
+        
         
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
