@@ -15,21 +15,23 @@ jobs:
         
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: false
           tags: myapp-image  
+    
+      - name: show image
+        run: docker image ls
+        
           
-      - name: Save Docker Image as Artifact
+      - name:  image
         
         uses: actions/upload-artifact@v2
         with:
           name: myapp-image
-          run: sudo su -
           path: /var/lib/docker/image/overlay2/$(docker inspect --format='{{ .Id }}' myapp)
           
       - name: Run tests 
