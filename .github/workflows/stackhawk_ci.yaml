@@ -23,16 +23,25 @@ jobs:
           push: false
           tags: myapp-image  
     
-      - name: show image
-        run: docker image ls
-        
-          
-      - name:  image
-        
+      - name: Save Docker Image as Tarball
+        run: |
+          docker save -o myapp-image.tar myapp
+          ls -lh myapp-image.tar
+
+      - name: Upload Docker Image Artifact
         uses: actions/upload-artifact@v2
         with:
           name: myapp-image
-          path: /var/lib/docker/image/overlay2/$(docker inspect --format='{{ .Id }}' myapp)
+          path: myapp-image.tar
+          
+      - name: Download Docker Image Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: myapp-image
+          path: /tmp/myapp-image.tar
+
+      - name: Load Docker Image
+        run: docker load -i /tmp/myapp-image.tar
           
       - name: Run tests 
         run: docker run -p 8080:80 -d myapp-image
