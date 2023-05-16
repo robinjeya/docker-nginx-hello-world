@@ -22,10 +22,16 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: docker-test       
+          tags: myapp-image  
+          
+      - name: Save Docker Image as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: myapp-image
+          path: /var/lib/docker/image/overlay2/$(docker inspect --format='{{ .Id }}' myapp)
           
       - name: Run tests 
-        run: docker run -p 8080:80 -d docker-test
+        run: docker run -p 8080:80 -d myapp-image
                      
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
