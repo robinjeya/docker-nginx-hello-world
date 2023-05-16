@@ -1,5 +1,4 @@
 name: StackHawk DAST Scan
-
 on:
   push:
     branches:
@@ -8,29 +7,29 @@ on:
 jobs:
   scan:
     runs-on: ubuntu-latest
-
     steps:
+    
       - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Clone repo
         uses: actions/checkout@v2
         
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Build and push
+        
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: false
-          tags: vigneshviky7/myapp:latest
-
-      - name: Setup StackHawk
-        run: |
-          curl -sSL https://download.stackhawk.com/cli | bash
-          export PATH="$HOME/.local/bin:$PATH"
-
-      - name: Run StackHawk DAST Scan
-        run: |
-          stackhawk init
-          stackhawk scan --container vigneshviky7/myapp:latest
-
+          tags: demo/myapp:latest
+        
+      - name: Run application
+        run: docker run --rm --detach --publish 8080:80 --name demo/myapp:latest
+        
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v2
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
