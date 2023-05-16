@@ -21,30 +21,30 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: myapp-image 
+          tags: myappimage 
     
       - name: Save Docker Image as Tarball
         run: |
-          docker save -o myapp-image.tar myapp
-          ls -lh myapp-image.tar
+          docker save -o myappimage.tar myapp
+          ls -lh myappimage.tar
 
       - name: Upload Docker Image Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: myapp-image
-          path: myapp-image.tar
+          name: myappimage
+          path: myappimage.tar
           
       - name: Download Docker Image Artifact
         uses: actions/download-artifact@v2
         with:
           name: myapp-image
-          path: /tmp/myapp-image.tar
+          path: /tmp/myappimage.tar
 
       - name: Load Docker Image
-        run: docker load -i /tmp/myapp-image.tar
+        run: docker load -i /tmp/myappimage.tar
           
       - name: Run tests 
-        run: docker run -p 8080:80 -d myapp-image
+        run: docker run -p 8080:80 -d myappimage
                      
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
