@@ -9,7 +9,7 @@ on:
         required: false
         type: string
       
-      secrets:
+    secrets:
 
       AWS_ACCESS_KEY_ID: #AWS access key id
         required: true
