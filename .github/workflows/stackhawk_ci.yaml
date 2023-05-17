@@ -27,7 +27,7 @@ jobs:
         run: docker image ls
           
       - name: Run tests 
-        run: docker run -p 8080:80 -d myappimage
+        run: docker run -p 8080:80 -d myappimage -u 0
                      
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
