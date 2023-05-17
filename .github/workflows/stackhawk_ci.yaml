@@ -6,7 +6,7 @@ on:
 
       REGION:
         default: 'eu-north-1' #change it to registry region
-        required: false
+        required: true
         type: string
       
     secrets:
