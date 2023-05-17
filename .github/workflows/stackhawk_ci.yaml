@@ -36,10 +36,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
           
-      - name: Run tests 
+      - name: Run aws image login 
+        run: aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 056087778785.dkr.ecr.eu-north-1.amazonaws.com
+        
+      - name: Docker run
         run: docker run -p 8080:80 -d ${{ secrets.ECR_REGISTRY_LOCATION }}
+        
+        
                      
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
