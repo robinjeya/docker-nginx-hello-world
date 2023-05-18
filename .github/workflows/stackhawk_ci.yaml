@@ -44,7 +44,9 @@ jobs:
         run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY_LOCATION }}
         
       - name: Docker run
-        run: docker run -p 8080:80 -d 056087778785.dkr.ecr.eu-north-1.amazonaws.com/testapp:latest
+        env:
+          image_Location: ${{ secrets.ECR_IMAGE_LOCATION }}
+        run: docker run -p 8080:80 -d ${{ secrets.ECR_IMAGE_LOCATION }}
         
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
