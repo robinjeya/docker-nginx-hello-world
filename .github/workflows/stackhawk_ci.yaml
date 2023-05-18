@@ -14,10 +14,10 @@ on:
       AWS_REGION: #AWS Account region
         required: true
         
-      ECR_REGISTRY_LOCATION:  # ECR registry image location 
+      AWS_ECR_REGISTRY_URL:  # AWS ECR URL
         required: true
 
-      AWS_IMAGE_LOCATION:  # ECR image location 
+      AWS_IMAGE_URL:  # AWS ECR image URL 
         required: true
 
   push:
@@ -41,10 +41,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           
       - name: Run aws image login 
-        run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY_LOCATION }}
+        run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URL }}
         
       - name: Docker run
-        run: docker run -p 8080:80 -d ${{ secrets.AWS_IMAGE_LOCATION }}
+        run: docker run -p 8080:80 -d ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_IMAGE_URL }}
         
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
