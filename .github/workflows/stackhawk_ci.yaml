@@ -17,7 +17,7 @@ on:
       ECR_REGISTRY_LOCATION:  # ECR registry image location 
         required: true
 
-      ECR_IMAGE_LOCATION:  # ECR image location 
+      AWS_IMAGE_LOCATION:  # ECR image location 
         required: true
 
   push:
@@ -32,6 +32,14 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: "🔧 Setup variables"
+        id: setup-variables
+        run: |
+          IMAGE_URL="https://console.cloud.google.com/artifacts/docker/${{ inputs.PROJECT_ID }}/${{ inputs.GAR_LOCATION }}/${{ inputs.DOCKER_REGISTRY }}/${{ inputs.NAME }}?project=${{ inputs.PROJECT_ID }}/"
+          echo "IMAGE_URL : ${IMAGE_URL}"
+          echo "IMAGE_URL=${IMAGE_URL}" >> $GITHUB_ENV
+          echo "IMAGE_URL=${IMAGE_URL}" >> $GITHUB_OUTPUT
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -44,9 +52,7 @@ jobs:
         run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY_LOCATION }}
         
       - name: Docker run
-        env:
-          image_Location: ${{ secrets.ECR_IMAGE_LOCATION }}
-        run: docker run -p 8080:80 -d ${{ secrets.ECR_IMAGE_LOCATION }}
+        run: docker run -p 8080:80 -d ${{ secrets.AWS_IMAGE_LOCATION }}
         
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
