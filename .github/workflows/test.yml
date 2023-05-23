@@ -6,7 +6,7 @@ on:
       - master 
       
   workflow_run:
-    workflows: main.yml
+    workflows: main
 jobs:
   app-setup:
     uses: favedom-dev/github-reusable-workflow/.github/workflows/app-setup.yaml@master
