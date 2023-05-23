@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master 
+ 
 jobs:
   app-setup:
     uses: favedom-dev/github-reusable-workflow/.github/workflows/app-setup.yaml@master
@@ -18,8 +19,8 @@ jobs:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       
   sast-scan:
-    uses: ./.github/workflows/main.yml
+    uses: ./.github/workflows/main.yml@master
     with:
-      NAME: ${{ needs.app-setup.outputs.NAME }}
-      VERSION: ${{ needs.repo-version.outputs.version }}
+      NAME: ${{ app-setup.outputs.NAME }}
+      VERSION: ${{ repo-version.outputs.version }}
  
