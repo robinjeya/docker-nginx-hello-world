@@ -7,10 +7,13 @@ on:
       
   workflow_call:
   
-jobs:  
+jobs: 
   sast-scan:
     runs-on: ubuntu-20.04
     steps:
+    - name: Checkout code
+    - uses: actions/checkout@v2
+    - name: sast
     - uses: ./.github/workflows/main.yml@master
 
  
