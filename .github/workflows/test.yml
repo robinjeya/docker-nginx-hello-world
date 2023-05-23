@@ -19,11 +19,13 @@ jobs:
       MONOREPO_APP: ${{ needs.app-setup.outputs.NAME }}
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    
+      
   sast-scan:
-    uses: ./.github/workflows/main.yml@ci
-    with:
-      NAME: ${{ needs.app-setup.outputs.NAME }}
-      VERSION: ${{ needs.repo-version.outputs.version }}
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: ./.github/workflows/main.yml@ci
+      with:
+       NAME: ${{ needs.app-setup.outputs.NAME }}
+       VERSION: ${{ needs.repo-version.outputs.version }}
 
  
