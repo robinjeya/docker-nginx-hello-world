@@ -7,17 +7,7 @@ on:
       
   workflow_call:
   
-jobs:
-  app-setup:
-    uses: favedom-dev/github-reusable-workflow/.github/workflows/app-setup.yaml@master
-    with:
-      OVERRIDE_NAME: pw-dims
- 
-  repo-version:
-    uses: favedom-dev/github-reusable-workflow/.github/workflows/repo-version.yaml@master
-    with:
-      MONOREPO_APP: ${{ needs.app-setup.outputs.NAME }}
-      
+jobs:  
   sast-scan:
     runs-on: ubuntu-20.04
     steps:
