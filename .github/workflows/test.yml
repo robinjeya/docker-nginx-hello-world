@@ -12,7 +12,7 @@ jobs:
     uses: favedom-dev/github-reusable-workflow/.github/workflows/app-setup.yaml@master
     with:
       OVERRIDE_NAME: pw-dims
-
+ 
   repo-version:
     uses: favedom-dev/github-reusable-workflow/.github/workflows/repo-version.yaml@master
     with:
