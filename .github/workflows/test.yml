@@ -19,7 +19,7 @@ jobs:
       MONOREPO_APP: ${{ needs.app-setup.outputs.NAME }}
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      
+    
   sast-scan:
     uses: robinjeya/docker-nginx-hello-world/.github/workflows/main.yml@master
     with:
