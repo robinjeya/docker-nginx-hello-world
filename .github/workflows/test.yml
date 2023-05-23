@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master 
+jobs:
+  build:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v2
+       
+  app-setup:
+    uses: favedom-dev/github-reusable-workflow/.github/workflows/app-setup.yaml@master
+    with:
+      OVERRIDE_NAME: pw-dims
+
+  repo-version:
+    uses: favedom-dev/github-reusable-workflow/.github/workflows/repo-version.yaml@master
+    with:
+      MONOREPO_APP: ${{ needs.app-setup.outputs.NAME }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  sast-scan:
+    uses: ./.github/workflows/sast-js.yml@master
+    with:
+      NAME: ${{ needs.app-setup.outputs.NAME }}
+      VERSION: ${{ needs.repo-version.outputs.version }}
+    env:
+      SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.QWIET_CI_TOKEN }}
