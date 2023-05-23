@@ -23,7 +23,7 @@ jobs:
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
   sast-scan:
-    uses: ./.github/workflows/sast-js.yml@master
+    uses: ./.github/workflows/main.yml@master
     with:
       NAME: ${{ needs.app-setup.outputs.NAME }}
       VERSION: ${{ needs.repo-version.outputs.version }}
