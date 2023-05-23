@@ -5,12 +5,6 @@ on:
     branches:
       - master 
 jobs:
-  build:
-   runs-on: ubuntu-latest
-   steps:
-     - name: Checkout code
-       uses: actions/checkout@v2
-       
   app-setup:
     uses: favedom-dev/github-reusable-workflow/.github/workflows/app-setup.yaml@master
     with:
@@ -22,10 +16,10 @@ jobs:
       MONOREPO_APP: ${{ needs.app-setup.outputs.NAME }}
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      
   sast-scan:
-    uses: ./.github/workflows/main.yml@master
+    uses: /.github/workflows/main.yml@master
     with:
       NAME: ${{ needs.app-setup.outputs.NAME }}
       VERSION: ${{ needs.repo-version.outputs.version }}
-    env:
-      SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.QWIET_CI_TOKEN }}
+ 
