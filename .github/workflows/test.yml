@@ -21,7 +21,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       
   sast-scan:
-    uses: robinjeya/docker-nginx-hello-world/.github/workflows/main.yml@master
+    uses: robinjeya/docker-nginx-hello-world/.github/workflows/main.yml@49266e9fe6235dcc5b882a4724d555912b9f1ac5
     with:
       NAME: ${{ app-setup.outputs.NAME }}
       VERSION: ${{ repo-version.outputs.version }}
