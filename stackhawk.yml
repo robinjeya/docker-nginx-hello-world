@@ -1,11 +1,11 @@
-# -- stackhawk configuration for demotestapp --
+# -- stackhawk configuration for demo --
 app:
   # -- An applicationId obtained from the StackHawk platform. --
-  applicationId: 9de1cc85-b020-4102-8372-455de546d992 # (required)
+  applicationId: f8887c93-3c6d-48de-b3ed-f99ee82c1626 # (required)
   # -- The environment for the applicationId defined in the StackHawk platform. --
   env: Development # (required)
   # -- The url of your application to scan --
-  host: http://localhost:8080 # (required)
+  host: https://cashapp.dev.primocashapp.com # (required)
 
 
 # -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
