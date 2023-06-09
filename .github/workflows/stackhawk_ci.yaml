@@ -46,6 +46,9 @@ jobs:
       - name: Docker run
         run: docker run -p 8080:80 -d ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_IMAGE_URL }}
         
+      - name: Docker list
+        run: docker ps -a
+        
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@v2
         with:
