@@ -44,7 +44,7 @@ jobs:
         run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URL }}
         
       - name: Docker run
-        run: docker run -p 8080:80 -d ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_IMAGE_URL }}
+        run: docker run -d ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_IMAGE_URL }}
         
       - name: Docker list
         run: docker ps -a
